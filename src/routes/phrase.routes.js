@@ -1,11 +1,23 @@
-import { Router } from 'express'
+import { Router } from "express";
 
-const router = Router()
+import {
+  createPhrase,
+  deletePhrase,
+  getPhrase,
+  getPhrases,
+  updatePhrase,
+} from "../controllers/phrase.controller.js";
 
-router.get('/phrase', (req, res) => {res.send("todas las prhases")})
-router.get('/phrase/:id', (req, res) => {res.send("1 prhase")})
-router.post('/phrase', (req, res) => {res.send("creando prhase")})
-router.delete('/phrase/:id', (req, res) => {res.send("eliminando prhase")})
-router.put('/phrase/:id',(req, res) => {res.send("actualizando prhase")})
+const router = Router();
 
-export default router; 
+router.get("/phrase", getPhrases);
+
+router.post("/phrase", createPhrase);
+
+router.get("/phrase/:id", getPhrase);
+
+router.delete("/phrase/:id", deletePhrase);
+
+router.put("/phrase/:id", updatePhrase);
+
+export default router;

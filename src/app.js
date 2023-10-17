@@ -1,21 +1,19 @@
 import express from "express";
-import morgan from 'morgan'
-import cors from 'cors'
+import morgan from "morgan";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
-import phraseRouter from './routes/phrase.routes.js'
+import phraseRouter from "./routes/phrase.routes.js";
+import authRouter from "./routes/auth.routes.js";
 
+const app = express();
 
-const app = express()
+app.use(cors());
+app.use(cookieParser());
+app.use(morgan("dev"));
+app.use(express.json());
 
-app.use(cors())
-app.use(morgan('dev'))
-app.use(express.json())
-
-app.get("/", (req, res) => {
-    res.json({hello: "hola mundo"})
-})
-
-app.use("/api", phraseRouter)
-
+app.use("/api", authRouter);
+app.use("/api", phraseRouter);
 
 export default app;
